@@ -30,3 +30,12 @@
     font-weight: 400;
     font-style: normal;
   }
+.coins {
+    background-color: gold; /* Set coins button background to black */
+    color: black;             /* Set coins button text color to gold */
+    border: none;    
+    font-size: x-large;        /* Remove border */
+    border-radius:10px ;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    padding: 10px;
+}
