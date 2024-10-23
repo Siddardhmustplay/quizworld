@@ -4,6 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Quiz.css';
 
 const Quizusercheck2 = () => {
+    const [quizType, setQuizType] = useState("");
+
+    useEffect(() => {
+      const storedQuizType = localStorage.getItem('quizType');
+      if (storedQuizType) {
+        setQuizType(storedQuizType); // Retrieve quiz type from localStorage
+      }
+    }, []);
     const location = useLocation(); // Get the location object
     const navigate = useNavigate(); // Initialize navigate
     const { region, username } = location.state || {}; // Destructure state
@@ -190,7 +198,8 @@ const Quizusercheck2 = () => {
         );
     }
     return (
-        <div>
+        <div >
+        {quizType}
             <section id="question-section" className="buytoken d-flex align-items-center justify-content-center">
                 <div className="container">
                     <div className="row justify-content-center">

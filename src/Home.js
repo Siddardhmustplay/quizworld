@@ -1,65 +1,47 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './Home.css'
-import { useNavigate } from 'react-router-dom'; // Make sure this is imported
-import friends from './images/friends.jpg'
+import './Home.css';
+import friends from './images/friends.jpg';
 
-const Home = ()=>{
-    const navigate = useNavigate(); // Initialize the useNavigate hook
+const Home = () => {
+  const navigate = useNavigate();
 
-  const handleStartClick = () => {
-    navigate('/question'); // Navigate to the "Question" page
+  const quizzes = [
+    { type: 'friend1', path: '/question' },
+    { type: 'friend2', path: '/questionsecond' },
+    { type: 'friend3', path: '/questionthird' },
+  ];
+
+  const handleStartClick = (quizType, path) => {
+    localStorage.setItem('quizType', quizType); // Store quiz type in localStorage
+    navigate(path); // Navigate to the specified page
   };
-  const handleStartClick2 = () => {
-    navigate('/questionsecond'); // Navigate to the "Question" page
-  };
-  const handleStartClick3 = () => {
-    navigate('/questionthird'); // Navigate to the "Question" page
-  };
-    return(
-        <div >
-  <section id="home-section" class="d-flex align-items-center justify-content-center">
-      <div class="container">
-         <div class="row justify-content-center">
-             
-              <div className=' col-md-12 text-center'>
-              <h1 className='protest-strike-regular-head text-center'>Know Your Friend</h1>
-              <div >
-              <img src={friends} className='frnd-png'/>
-              </div>
-              <button onClick={handleStartClick} className='btn-start  protest-strike-regular-BTN'>Start</button>
+
+  return (
+    <div>
+      {quizzes.map((quiz, index) => (
+        <section key={index} className="d-flex align-items-center justify-content-center">
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className='col-md-12 text-center'>
+                <h1 className='protest-strike-regular-head text-center'>Know Your Friend</h1>
+                <div>
+                  <img src={friends} className='frnd-png' alt="Friends" />
+                </div>
+                <button 
+                  onClick={() => handleStartClick(quiz.type, quiz.path)} 
+                  className='btn-start protest-strike-regular-BTN'
+                >
+                  Start
+                </button>
               </div>
             </div>
-        </div>
-    </section>
-    <section id="home-section" class="d-flex align-items-center justify-content-center">
-      <div class="container">
-         <div class="row justify-content-center">
-             
-              <div className=' col-md-12 text-center'>
-              <div >
-              <img src={friends} className='frnd-png'/>
-              </div>
-              <button onClick={handleStartClick2} className='btn-start  protest-strike-regular-BTN'>Start</button>
-              </div>
-            </div>
-        </div>
-    </section>
-    <section id="home-section" class="d-flex align-items-center justify-content-center">
-      <div class="container">
-         <div class="row justify-content-center">
-             
-              <div className=' col-md-12 text-center'>
-              <div >
-              <img src={friends} className='frnd-png'/>
-              </div>
-              <button onClick={handleStartClick3} className='btn-start  protest-strike-regular-BTN'>Start</button>
-              </div>
-            </div>
-        </div>
-    </section>
+          </div>
+        </section>
+      ))}
     </div>
-    )
-}
+  );
+};
+
 export default Home;
